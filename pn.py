@@ -33,9 +33,9 @@ with c30:
     if uploaded_file is not None:
         # Ouvrir l'image avec la bibliothèque Pillow
 
-        image = image.image_utils.load_img(uploaded_file)
+        img = image.image_utils.load_img(uploaded_file)
         # Redimensionner l'image à la taille cible
-        image_resized = image.resize((224, 224))
+        image_resized = img.resize((224, 224))
         
 
         # Afficher le message d'information
