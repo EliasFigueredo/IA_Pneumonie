@@ -8,7 +8,7 @@ from tensorflow.keras.preprocessing import image as image_utils
 from tensorflow.keras.applications.vgg16 import preprocess_input
 import numpy as np
 
-
+from PIL import Image
 
 
 from keras.models import load_model
@@ -31,9 +31,11 @@ with c30:
     )
 
     if uploaded_file is not None:
+       
+        # img = image.image_utils.load_img(uploaded_file)
+        
         # Ouvrir l'image avec la bibliothèque Pillow
-
-        img = image.image_utils.load_img(uploaded_file)
+        img = Image.open(uploaded_file)
         # Redimensionner l'image à la taille cible
         image_resized = img.resize((224, 224))
         
