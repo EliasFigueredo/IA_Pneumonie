@@ -16,9 +16,8 @@ from keras.preprocessing import image
 
 model=load_model('chest_xray.h5')
 
-# Características básicas de la página
+# Définition de la page web
 st.set_page_config(page_icon="📊", page_title="Detección de Pneumonie", layout="wide")
-# st.image("https://www.codificandobits.com/img/cb-logo.png", width=200)
 st.title("Detección de Pneumonie")
 
 c29, c30, c31 = st.columns([1, 6, 1])  # 3 columnas: 10%, 60%, 10%
@@ -36,21 +35,18 @@ with c30:
         img = keras_image.load_img(uploaded_file)       
         # Redimensionner l'image à la taille cible
         image_resized = img.resize((224, 224))
-        
-
+ 
         # Afficher le message d'information
-        info_box_wait = st.info("Realizando la clasificación...")
+        info_box_wait = st.info("Veuillez patienter. Nous sommes en train de travailler...")
 
         # Convertir l'image redimensionnée en tableau numpy
-        # x = image_utils.img_to_array(image_resized)
         x =  keras_image.img_to_array(image_resized)
-       
         st.write(x.shape)
        
         x = np.expand_dims(x, axis=0)
         img_data = preprocess_input(x)
 
-        # Placeholder pour le modèle - Vous devez charger votre modèle ici
+        # Placeholder pour le modèle 
         model = load_model('chest_xray.h5')
 
         # Faire la prédiction
@@ -61,7 +57,6 @@ with c30:
             st.info("La personne est atteinte de PNEUMONIA")
         else:
             st.info("Le résultat est normal")
-            
-        # print(x.shape)
-        # st.info(x.shape)
+
+        # Affichage de l'image
         st.image(image_resized, caption="Image téléchargée", use_column_width=True)
